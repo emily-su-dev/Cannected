@@ -18,7 +18,7 @@ function App() {
       </header>
       <header>
         <a href="!Login.html">
-          <button style="background-color: navy; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-size: 15px; text-align: center; display: inline;">
+          <button>
             Login
           </button>
         </a>
