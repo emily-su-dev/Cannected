@@ -3,13 +3,20 @@
   margin-top: 50px;
 }
 
+/* Change the background color of the whole page */
+body {
+  background-color: #ebf5f3; /* Light gray color */
+  font-family: 'Verdana', sans-serif
+}
+
 h1 {
-  color: #4CAF50;
+  color: #4e854c;
 }
 
 button {
+  font-family: 'Verdana', sans-serif; 
   padding: 10px 20px;
-  background-color: #008CBA;
+  background-color: #00ba9b;
   color: white;
   border: none;
   cursor: pointer;
@@ -17,5 +24,14 @@ button {
 }
 
 button:hover {
-  background-color: #005f73;
+  background-color: #029e84;
+}
+
+/* Style the description */
+.description {
+  font-family: 'Verdana', sans-serif;
+  color: #666;
+  font-size: 1.2em;
+  text-align: center;
+  margin-top: 10px;
 }
