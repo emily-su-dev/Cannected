@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'; // Optional: for adding styles
 
 function App() {
+  // Step 1: Define the state for the button click
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  // Step 2: Create the login function
+  const handleLogin = () => {
+    setLoggedIn(true); // Change the state when the button is clicked
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Step 3: Title */}
+      <h1>Welcome to Cannected!</h1>
+
+      {/* Step 4: Conditional rendering based on login state */}
+      {!loggedIn ? (
+        <button onClick={handleLogin}>Login</button> // Button for login
+      ) : (
+        <p>You are logged in!</p> // Message after login
+      )}
     </div>
   );
 }
