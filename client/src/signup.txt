@@ -1,0 +1,17 @@
+<p>New User? Sign Up below.</p>
+          <h1>SIGN UP</h1>
+          <form>
+              <label for="name">Enter your name:</label>
+              <input type="text" id="name" name="name">
+          </form>
+          <form>
+              <label for="email">Enter your email:</label>
+              <input type="text" id="email" name="email">
+          </form>
+          <form>
+              <label for="password">Enter your password:</label>
+              <input type="text" id="password" name="password">
+          </form>
+          <a href = "!Midpage.html"> 
+            <button>sign up</button>
+          </a>

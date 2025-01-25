@@ -1,0 +1,21 @@
+body{
+    font-family: Times New Roman, sans-serif;
+    background-color: lightblue;
+    margin: 10;
+    padding: 10;
+   }
+title{
+    color: navy;
+    text-align: center;
+    font-size: 50px;
+}   
+h1{
+       color: green;
+       text-align: left;
+    font-size: 30px;
+}
+h2{
+       color: red;
+    text-align: right;
+    font-size: 30px;
+}
