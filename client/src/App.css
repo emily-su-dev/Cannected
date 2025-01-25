@@ -19,3 +19,20 @@ button {
 button:hover {
   background-color: #005f73;
 }
+
+body{
+  font-family: Times New Roman, sans-serif;
+  background-color: lightblue;
+  margin: 5;
+  padding: 5;
+}
+t{
+  color: navy;
+  text-align: center;
+  font-size: 50px;
+}      
+h2{
+ color: black;
+text-align: left;
+font-size: 30px;
+}
