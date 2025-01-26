@@ -32,14 +32,14 @@ function Profile() {
                 // Here, you can proceed to the donation process (or navigate to another page)
             } else {
                 // If number of cans is not 0, display a message and stay on the page
-                alert('You cannot donate until you have 0 cans.');
+                alert('You can only have 1 posting at a time!');
             }
         }
     };
 
     const handleCollectClick = () => {
         // You can implement collect functionality here
-        alert('Collect button clicked!');
+        navigate('/Collection');
     };
 
     return (
@@ -47,6 +47,13 @@ function Profile() {
             <h1>Welcome, {user?.username}!</h1>
             <button onClick={handleDonateClick}>Donate</button>
             <button onClick={handleCollectClick}>Collect</button>
+            {user? (
+                <div>
+                    {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} cans at {user.address}!</p>}
+                </div>
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
     );
 }

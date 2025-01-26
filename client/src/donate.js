@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // To navigate after submission
 
 function Donate() {
   const [numberOfCans, setNumberOfCans] = useState(0);
+  const navigate = useNavigate();  // For navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -10,13 +12,40 @@ function Donate() {
     const loggedUser = JSON.parse(localStorage.getItem('user'));
     
     if (loggedUser) {
-      // Update the user's numberOfCans
-      loggedUser.numberOfCans += numberOfCans;
+      // Check if the numberOfCans is greater than 0
+      if (numberOfCans <= 0) {
+        alert('You need to donate at least 1 can!');
+        return;
+      }
 
-      // Save the updated user object to localStorage
-      localStorage.setItem('user', JSON.stringify(loggedUser));
+      try {
+        // Send a PUT request to update the number of cans in the backend
+        const response = await fetch(`/api/users/${loggedUser._id}/donate`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ numberOfCans }),  // Sending the donation info to backend
+        });
 
-      alert(`You donated ${numberOfCans} cans!`);
+        const data = await response.json();
+
+        if (response.status === 200) {
+          // On success, update the localStorage
+          loggedUser.numberOfCans += numberOfCans;
+          localStorage.setItem('user', JSON.stringify(loggedUser));
+
+          alert(`You donated ${numberOfCans} cans!`);
+          
+          // Redirect to the profile page
+          navigate('/profile');
+        } else {
+          alert(data.message || 'Failed to submit donation');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to submit donation');
+      }
     } else {
       alert('User not found');
     }
@@ -30,7 +59,7 @@ function Donate() {
         <input
           type="number"
           value={numberOfCans}
-          onChange={(e) => setNumberOfCans(e.target.value)}
+          onChange={(e) => setNumberOfCans(Number(e.target.value))}
           required
         />
         <button type="submit">Submit Donation</button>
