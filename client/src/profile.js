@@ -21,7 +21,6 @@ function Profile() {
     const handleDonateClick = async () => {
         if (!user?.address) {
             // If no address, prompt the user to add one
-            alert('You need to provide an address before donating.');
             navigate('/add-address');
         } else {
             const response = await fetch(`/api/users/${user._id}`);

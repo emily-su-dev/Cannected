@@ -10,7 +10,7 @@
     box-sizing: border-box;
 }
 
-.prof-container {
+.addr-container {
     background-color: rgba(0, 0, 0, 0.7);
     /* Semi-transparent dark background for the container */
     border-radius: 15px;
@@ -18,10 +18,10 @@
     width: 80%;
     max-width: 400px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin-top: -100px;
+    margin-top: -40px;
 }
 
-.prof-title {
+.addr-title {
     margin-top: 0;
     font-size: 24px;
     font-weight: 600;
@@ -33,7 +33,7 @@
     color: #fcfffe;
 }
 
-.prof-description {
+.addr-description {
     font-size: 1rem;
     margin-bottom: 20px;
     color: #dfe6e9;
@@ -47,7 +47,7 @@
     align-items: center;
 }
 
-.prof-input {
+.addr-input {
     width: 100%;
     padding: 12px 15px;
     font-size: 1rem;
@@ -59,11 +59,39 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.prof-input::placeholder {
+.addr-input::placeholder {
     color: #b2bec3;
 }
 
-.prof-input:focus {
+.addr-input:focus {
     border: 2px solid #00ba9b;
     box-shadow: 0 0 10px rgba(0, 186, 155, 0.5);
+}
+
+/* Styling for buttons */
+.addr-button {
+    padding: 15px 25px;
+    font-size: 1rem;
+    margin: 10px;
+    background-color: #00ba9b;
+    /* Button background color */
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Button hover effects */
+.addr-button:hover {
+    background-color: #029e84;
+    transform: scale(1.05);
+}
+
+.addr-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }

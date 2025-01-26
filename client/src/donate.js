@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // To navigate after submission
 
 function Donate() {
-  const [numberOfCans, setNumberOfCans] = useState(0);
+  const [numberOfCans, setNumberOfCans] = useState('');
   const navigate = useNavigate();  // For navigation
 
   const handleSubmit = async (e) => {
@@ -13,7 +13,7 @@ function Donate() {
     
     if (loggedUser) {
       // Check if the numberOfCans is greater than 0
-      if (numberOfCans <= 0) {
+      if (numberOfCans <= 0 || numberOfCans === '') {
         alert('You need to donate at least 1 can!');
         return;
       }
@@ -32,7 +32,7 @@ function Donate() {
 
         if (response.status === 200) {
           // On success, update the localStorage
-          loggedUser.numberOfCans += numberOfCans;
+          loggedUser.numberOfCans += Number(numberOfCans);
           localStorage.setItem('user', JSON.stringify(loggedUser));
 
           alert(`You donated ${numberOfCans} cans!`);
@@ -59,7 +59,7 @@ function Donate() {
         <input
           type="number"
           value={numberOfCans}
-          onChange={(e) => setNumberOfCans(Number(e.target.value))}
+          onChange={(e) => setNumberOfCans(e.target.value)}  // Keep as string to allow empty input
           required
         />
         <button type="submit">Submit Donation</button>

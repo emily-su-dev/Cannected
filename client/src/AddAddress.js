@@ -89,23 +89,23 @@ function AddAddress() {
 
     return (
         <div className="page-container">
-            <div className="prof-container">
-                <h2 className="prof-title">Add Your Address</h2>
-                <p className="prof-description">
+            <div className="addr-container">
+                <h2 className="addr-title">Add Your Address</h2>
+                <p className="addr-description">
                     This address will be used when you choose to donate your cans.
                 </p>
                 <form className="address-form" onSubmit={handleSubmit}>
                     <input
                         id="address"
                         type="text"
-                        className="prof-input"
+                        className="addr-input"
                         placeholder="Enter your address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         required
                     />
-                    <div className="prof-buttons-container">
-                        <button type="submit" className="prof-button">Submit</button>
+                    <div className="addr-buttons-container">
+                        <button type="submit" className="addr-button">Submit</button>
                     </div>
                 </form>
             </div>
