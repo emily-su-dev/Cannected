@@ -61,7 +61,7 @@ function Profile() {
                 </div>
                 {user? (
                     <div className="prof-description">
-                        {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} cans at {user.address}!</p>}
+                        {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} can(s) at {user.address}!</p>}
                     </div>
                 ) : (
                     <p>Loading...</p>

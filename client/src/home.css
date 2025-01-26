@@ -9,6 +9,20 @@ body {
     height: 100vh;
 }
 
+.logo {
+    height: 64px;
+    width: 64px;
+    justify-content: center;
+    align-items: center;
+  }
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}  
+
 .home-container {
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for the container */
     border-radius: 15px;
@@ -20,6 +34,7 @@ body {
 
 /* Styling for the title */
 .home-title {
+    margin-top: 0;
     font-size: 46px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -32,7 +47,7 @@ body {
 
 /* Description text styling */
 .home-description {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     margin-bottom: 30px;
     color: #dfe6e9;
     text-align: center;

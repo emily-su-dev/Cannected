@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // To navigate after submission
+import './donate.css';
 
 function Donate() {
   const [numberOfCans, setNumberOfCans] = useState(0);
@@ -53,16 +54,16 @@ function Donate() {
 
   return (
     <div>
-      <h1>Donate Cans</h1>
+      <h1 className="don-title">Donate Cans</h1>
       <form onSubmit={handleSubmit}>
-        <label>Number of Cans:</label>
+        <label className="don-description">Number of Cans:</label>
         <input
           type="number"
           value={numberOfCans}
           onChange={(e) => setNumberOfCans(Number(e.target.value))}
           required
         />
-        <button type="submit">Submit Donation</button>
+        <button type="submit">Make a can posting!</button>
       </form>
     </div>
   );

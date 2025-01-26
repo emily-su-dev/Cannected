@@ -1,11 +1,4 @@
-h2 {
-    color:#332e58;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-align: center;
-    font-size: 29px;
-}
-
-.prof-container {
+.don-container {
     background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for the container */
     border-radius: 15px;
     padding: 40px;
@@ -14,13 +7,13 @@ h2 {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.prof-title-container {
+.don-title-container {
     margin: 0; /* Ensure no extra margin is added */
     padding: 0; /* Ensure no padding is added */
 }
 
 /* Styling for the title */
-.prof-title {
+.don-title {
     margin-top: 0; /* Remove any top margin */
     font-size: 46px;
     font-weight: 600;
@@ -33,7 +26,7 @@ h2 {
 }
 
 /* Description text styling */
-.prof-description {
+.don-description {
     font-size: 1.2rem;
     margin-bottom: 30px;
     color: #dfe6e9;
@@ -42,7 +35,7 @@ h2 {
 }
 
 /* Styling for buttons */
-.prof-button {
+.don-button {
     padding: 15px 25px;
     font-size: 1rem;
     margin: 10px;
@@ -55,21 +48,21 @@ h2 {
 }
 
 /* Button hover effects */
-.prof-button:hover {
+.don-button:hover {
     background-color: #029e84;
     transform: scale(1.05);
 }
 
 /* Button for sign up with a different color */
-.prof-button:nth-child(2) {
+.don-button:nth-child(2) {
     background-color: #6c5ce7;
 }
 
-.prof-button:nth-child(2):hover {
+.don-button:nth-child(2):hover {
     background-color: #5e4bd6;
 }
 
-.prof-buttons-container {
+.don-buttons-container {
     display: flex;
     justify-content: center;
     align-items: center;
