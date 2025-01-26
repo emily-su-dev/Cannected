@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './home.css';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
@@ -12,14 +12,15 @@ function Home() {
       };
 
     return (
-        <div className="App">
-            <h1>Welcome to Cannected!</h1>
-            <p class="description">Talk about problem</p>
-
-            <button onClick={handleNavigateToLogin}>Log In</button>
-            <button onClick={handleNavigateToSignUp}>Sign Up</button>
-
+        <div className="home-container">
+            <h1 className="home-title">Welcome to Cannected!</h1>
+            <p className="home-description">Talk about problem</p>
+            <div className="home-buttons-container">
+                <button className="home-button" onClick={handleNavigateToLogin}>Log In</button>
+                <button className="home-button" onClick={handleNavigateToSignUp}>Sign Up</button>
+            </div>
         </div>
+
     )
 }
 

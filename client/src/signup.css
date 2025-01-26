@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Verdana", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 350px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+.login-container h1 {
+    margin-bottom: 10px;
+    font-family: "Verdana", sans-serif;
+    font-optical-sizing: auto;
+    color: #4e854c;
+    text-align: center;
+}
+.login-container .divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.login-container .divider::before,
+.login-container .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+}
+.login-container .divider span {
+    margin: 0 10px;
+    color: #888;
+}
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    
+}
+.login-container button.submit {
+    font-family: "Verdana", sans-serif;
+    background-color: #00ba9b;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+.login-container button.submit:hover {
+    background-color: #029e84;
+}
+
+.input-container {
+    width: 300px;
+    font-family: Verdana, sans-serif;
+    /* display: 'flex'; */
+    /* justifyContent: 'center';
+    alignItems: 'center'; */
+}
+
+
+
+.container input[type="email"], .container input[type="text"] {
+    /* Same styles for both input types */
+    font-size: 16px;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;  /* Stack fields vertically */
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+}
+
+.container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;  /* Space between fields */
+}
+
+.container label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;  /* Space between label and input */
+}
+
+.container input {
+    width: 100%;
+    padding: 8px;
+    font-family: Arial, sans-serif;
+}

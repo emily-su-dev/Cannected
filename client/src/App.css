@@ -5,7 +5,7 @@
 
 /* Change the background color of the whole page */
 body {
-  background-color: #ebf5f3; /* Light gray color */
+  background-color: #def8f3; /* Light gray color */
   font-family: 'Verdana', sans-serif
 }
 
@@ -29,6 +29,8 @@ h1 {
   text-align: center;
 }
 
+
+
 button {
   font-family: 'Verdana', sans-serif; 
   padding: 10px 20px;
@@ -41,10 +43,6 @@ button {
 
 button:hover {
   background-color: #029e84;
-}
-
-.button-submit {
-
 }
 
 /* Style the description */

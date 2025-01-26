@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Verdana", sans-serif;
+    background: #def8f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;  /* Ensures body content (header and login form) are aligned correctly */
+}
+
+header {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    display: flex;
+    align-items: flex-start; 
+    padding: 35px 60px;
+    background-color: transparent; 
+    z-index: 10; /* Ensure header appears on top */
+}
+
+.login-container {
+    width: 350px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centers everything inside the container */
+    justify-content: center;  /* Centers the content vertically */
+}
+
+
+
+.create-account {
+    margin-top: 15px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.create-account a {
+    color: rgb(75, 150, 107);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.create-account a:hover {
+    text-decoration: underline;
+}
+ 
+  .create-account p {
+    margin: 0;  /* Removes default margin from the p tags */
+  }

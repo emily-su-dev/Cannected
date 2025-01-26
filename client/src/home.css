@@ -1,0 +1,125 @@
+/* General styles for the page */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6c5ce7, #00b894);  /* Gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.home-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for the container */
+    border-radius: 15px;
+    padding: 40px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the title */
+.home-title {
+    font-size: 46px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #00b894;
+}
+
+/* Description text styling */
+.home-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #dfe6e9;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Styling for buttons */
+.home-button {
+    padding: 15px 25px;
+    font-size: 1rem;
+    margin: 10px;
+    background-color: #00ba9b; /* Button background color */
+    color: #fff;
+    border: none;
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Button hover effects */
+.home-button:hover {
+    background-color: #029e84;
+    transform: scale(1.05);
+}
+
+/* Button for sign up with a different color */
+.home-button:nth-child(2) {
+    background-color: #6c5ce7;
+}
+
+.home-button:nth-child(2):hover {
+    background-color: #5e4bd6;
+}
+
+.home-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* home.css */
+/* .home-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 40px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.home-title {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.home-description {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #dfe6e9;
+}
+
+.home-button {
+    padding: 15px 25px;
+    font-size: 1rem;
+    margin: 10px;
+    background-color: #00ba9b;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.home-button:hover {
+    background-color: #029e84;
+    transform: scale(1.05);
+}
+
+.home-button:nth-child(2) {
+    background-color: #6c5ce7;
+}
+
+.home-button:nth-child(2):hover {
+    background-color: #5e4bd6;
+} */

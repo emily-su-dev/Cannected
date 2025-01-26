@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate for routing
+import './profile.css';
 
 function Profile() {
     const [user, setUser] = useState(null);
@@ -44,17 +45,30 @@ function Profile() {
 
     return (
         <div>
-            <h1>Welcome, {user?.username}!</h1>
-            <button onClick={handleDonateClick}>Donate</button>
-            <button onClick={handleCollectClick}>Collect</button>
-            {user? (
-                <div>
-                    {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} cans at {user.address}!</p>}
+            <div className="prof-title-container">
+                <h2 className="prof-subtitle">Hi, {user?.username}!</h2>
+                <h2 className="prof-subtitle">Welcome to</h2>
+                <p className="prof-title">Cannected</p>
+                <p> </p>
+            </div>
+
+            <div className="prof-container">
+                
+                <p className="prof-description">Talk about some user information</p>
+                <div className="prof-buttons-container">
+                    <button className="prof-button" onClick={handleDonateClick}>Donate</button>
+                    <button className="prof-button" onClick={handleCollectClick}>Collect</button>
                 </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+                {user? (
+                    <div>
+                        {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} cans at {user.address}!</p>}
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </div>
         </div>
+        
     );
 }
 
