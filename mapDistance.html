@@ -42,6 +42,8 @@ async function initMap() {
     <div id="result"></div>
     <gmp-map center="44.233334, -76.500000" zoom="14" map-id="MAP1"style="height: 400px"></gmp-map>
     <div id="map" style="height: 500px; width: 100%;"></div>
+    <div id="closestDropoff"></div>
+
 
     <script>
         var pos = {
@@ -76,28 +78,39 @@ async function initMap() {
         }
 
         function initAutocomplete() {
+            google.maps.importLibrary("geometry"); // Import geometry library
             getLocation();
             addressAutocomplete('destination');
         }
-        
-        async function showMap(address) {
-            const geocoder = new google.maps.Geocoder();
 
-            const latLng = await new Promise((resolve, reject) => { //Convert address to lat and long
-                geocoder.geocode({ address: address }, (results, status) => {
-                    if (status === "OK") {
+
+        async function initMap() {
+            await google.maps.importLibrary("geometry"); 
+        }
+
+        function addresssToLatLng(address) {
+            return new Promise((resolve, reject) => {
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == 'OK') {
                         resolve(results[0].geometry.location);
                     } else {
-                        reject("Could not find location");
+                        reject('Geocode was not successful for the following reason: ' + status);
                     }
                 });
             });
+        }
+
+
+        
+        async function showMap(address) {
+            const latLng = await addresssToLatLng(address);
 
             const { Map } = await google.maps.importLibrary("maps");
             const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
             const map = new Map(document.getElementById("map"), {
-                center: { lat: 44.233334, lng: -76.500000 }, //For kingston 
+                center: latLng,
                 zoom: 14,
                 mapId: "MAP1", 
             });
@@ -106,18 +119,20 @@ async function initMap() {
                 map,
                 position: latLng,
             });
-            
-
         }
 
-
+        
         function calculateDistance(currPos, destinationID, resultID) {
             const origin = { "lat": pos.latitude, "lng": pos.longitude }; //Current position
+
             const destination = document.getElementById(destinationID).value;
+            //const destination = closestPosting().address;
             const resultDiv = document.getElementById(resultID);
 
             const service = new google.maps.DistanceMatrixService();
             showMap(destination);
+            initClosest(destination);
+
 
             service.getDistanceMatrix(
                 {
@@ -130,7 +145,7 @@ async function initMap() {
                     if (status === 'OK') {
                         const distance = response.rows[0].elements[0].distance.text;
                         const duration = response.rows[0].elements[0].duration.text;
-                        resultDiv.innerHTML = `Distance: ${distance}<br>Walk Time: ${duration}`;
+                        resultDiv.innerHTML = `Distance: ${distance}<br>Walk Time: ${duration}<br>Address: ${destination}`;
                     } else {
                         resultDiv.innerHTML = 'Cannot calculate distance';
                     }
@@ -138,15 +153,91 @@ async function initMap() {
             );
         }
 
-        function closestAddress(addressList){
-            let closest = list[0];
-            let closestDistance = google.maps.geometry.spherical.computeDistanceBetween(origin, closest.geometry.location);
-            for (let i = 1; i < list.length; i++){
-                let distance = google.maps.geometry.spherical.computeDistanceBetween(origin, list[i].geometry.location);
-                if (distance < closestDistance){
-                    closest = list[i];
-                    closestDistance = distance;
+        
+        function latLngDistance(latLng, address) {
+            latlng2 = addresssToLatLng(address);
+            return latlng2.lat;
+                //return google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latLng.latitude, latLng.longitude), latLng2);
+        
+        }
+
+        function initClosest(address) {
+            const distanceDropoff = document.getElementById("closestDropoff");
+            const closest = latLngDistance(pos, address);
+            distanceDropoff.innerHTML = `Closest Dropoff: ${closest}`;
+
+        }
+
+        async function closestPosting(){
+            list = [
+                {
+                    "_id": "5e8c1d5b0190b214360dc0f1",
+                    "username": "b23",
+                    "email": "b23@gmail.com",
+                    "password": "lol",
+                    "address": "365 Victoria Street, Kingston, ON, Canada",
+                    "numberOfCans": 5
+                },
+                {
+                    "_id": "5e8c1d5b0190b214360dc0f2",
+                    "username": "b24",
+                    "email": "b24@gmail.com",
+                    "password": "lol",
+                    "address": "",
+                    "numberOfCans": 6
+                },
+                {
+                    "_id": "5e8c1d5b0190b214360dc0f3",
+                    "username": "b25",
+                    "email": "b25@gmail.com",
+                    "password": "lol",
+                    "address": "2 Birch Avenue, Kingston, ON, Canada",
+                    "numberOfCans": 7
+                },
+                {
+                    "_id": "5e8c1d5b0190b214360dc0f4",
+                    "username": "b26",
+                    "email": "b26@gmail.com",
+                    "password": "lol",
+                    "address": "",
+                    "numberOfCans": 8
+                },
+                {
+                    "_id": "5e8c1d5b0190b214360dc0f5",
+                    "username": "b27",
+                    "email": "b27@gmail.com",
+                    "password": "lol",
+                    "address": "3 Johnson Street, Kingston, ON, Canada",
+                    "numberOfCans": 9
+                },
+                {
+                    "_id": "5e8c1d5b0190b214360dc0f6",
+                    "username": "b28",
+                    "email": "b28@gmail.com",
+                    "password": "lol",
+                    "address": "",
+                    "numberOfCans": 10
                 }
+            ];
+            let closest = list[0];
+            let closestDistance = 999999;
+            //let closestDistance = google.maps.geometry.spherical.computeDistanceBetween(origin, closest.geometry.location);
+            for (let i = 0; i < list.length; i++){
+                if (list[i].numberOfCans > 0 && list[i].address) {
+                    try {
+                        const latLng = addresssToLatLng(list[i].address);
+                        console.log(latLng);
+                        const distance = google.maps.geometry.spherical.computeDistanceBetween(origin, latLng);
+                        
+                        if (distance < closestDistance) {
+                            closest = list[i];
+                            closestDistance = distance;
+                        }
+                    } catch (error) {
+                        console.error(`Error processing latLng: ${list[i].address}`, error);
+                    }
+                }
+                
             }
             return closest;
         }
