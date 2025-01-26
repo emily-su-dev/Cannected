@@ -98,7 +98,7 @@ function Collections() {
             async function fetchUsers() {
                 const loggedUser = JSON.parse(localStorage.getItem('user'));
 
-                const response = await fetch('/api/users', {
+                const response = await fetch('/api/users/postings', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 });
 
 // Fetch users API endpoint
-app.post('/api/users', async (req, res) => {
+app.post('/api/users/postings', async (req, res) => {
     try {
         const { email } = req.body;  // Extract the email from the body of the request
 
