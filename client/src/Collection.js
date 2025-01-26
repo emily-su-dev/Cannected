@@ -23,7 +23,7 @@
         );
     }
 }*/
-import './index.css';
+import './style.css';
 
 function Collection(props){
     
