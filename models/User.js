@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    placeID: { type: String, default: null },  // Allow placeID to be null or a string
+    address: { type: String, default: null },
     numberOfCans: { type: Number, default: 0 }  // Default numberOfCans is 0
 });
 
