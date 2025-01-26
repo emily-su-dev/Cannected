@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Distance Calculator</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+        #geolocation { margin-top: 20px; font-weight: bold; }
+        input { width: 100%; margin: 10px 0; padding: 5px; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Distance Calculator</h2>
+    <div id = "geolocation" type ="text" placeholder = "Allow permission">
+    <!--<input id="origin" type="text" placeholder="Origin Address"> -->
+    <input id="destination" type="text" placeholder="Destination Address">
+    <button onclick="calculateDistance(x, 'destination', 'result')">Calculate Distance</button>
+    <div id="result"></div>
+    
+<script>
+        var x = {
+            latitude: 0,
+            longitude: 0
+        };
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(logPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function logPosition(position) {
+            x.latitude = position.coords.latitude, 
+            x.longitude = position.coords.longitude;
+            console.log(x);
+        }
+
+        function addressAutocomplete(elementID) {
+            const center = { lat: 44.233334, lng: -76.500000 }; //For Kingston
+            const defaultBounds = {  
+                north: center.lat + 0.1,
+                south: center.lat - 0.1,
+                east: center.lng + 0.1,
+                west: center.lng - 0.1,
+            };
+
+            const Input = document.getElementById(elementID);
+            new google.maps.places.Autocomplete(Input, {bounds: defaultBounds, types: ['address']});
+        }
+        
+        function initAutocomplete() {
+            getLocation();
+            addressAutocomplete('destination');
+        }
+        
+
+        function calculateDistance(currPos, destinationID, resultID) {
+            const origin = {"lat": x.latitude , "lng": x.longitude};
+            const destination = document.getElementById(destinationID).value;
+            //const destination = document.getElementById(destinationID).value;
+            const resultDiv = document.getElementById(resultID);
+            
+            const service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix(
+                {
+                    origins: [origin],
+                    destinations: [destination],
+                    travelMode: 'WALKING',
+                    unitSystem: google.maps.UnitSystem.METRIC
+                }, 
+                (response, status) => {
+                    if (status === 'OK') {
+                        const distance = response.rows[0].elements[0].distance.text;
+                        const duration = response.rows[0].elements[0].duration.text;
+                        resultDiv.innerHTML = `Distance: ${distance}<br>Walk Time: ${duration}`;
+                    } else {
+                        resultDiv.innerHTML = 'Cannot calculate distance';
+                    }
+                }
+            );
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPHGXRODOE33zFmbI2l6OSgnkB9jhf8sQ&libraries=places&callback=initAutocomplete" async defer></script>
+</body>
+</html>
