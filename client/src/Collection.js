@@ -5,6 +5,8 @@ function Collections() {
     const [userLocation, setUserLocation] = useState(null);  // Store current user location
     const [addressRevealed, setAddressRevealed] = useState({}); // To track which user's address is revealed
     const [distances, setDistances] = useState({}); // Store distances for each user based on their id
+    const [closestUser, setClosestUser] = useState(null);  // Store the closest user
+    const [showMapFlag, setShowMapFlag] = useState(false);  // Flag to display map
 
     useEffect(() => {
         // Check if the script is already loaded
@@ -96,30 +98,31 @@ function Collections() {
     useEffect(() => {
         if (userLocation) {
             async function fetchUsers() {
-                const loggedUser = JSON.parse(localStorage.getItem('user'));
+                const loggedUser = JSON.parse(localStorage.getItem('user'));  // Get logged-in user from localStorage
 
                 const response = await fetch('/api/users/postings', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email: loggedUser.email }),
+                    body: JSON.stringify({ email: loggedUser.email }),  // Send logged-in user's email in the body
                 });
 
                 const data = await response.json();
                 setUsers(data.users);
 
-                // Calculate distance for each user
-                data.users.forEach(async (user) => {
-                    const donationAddress = user.address;
+                let closestDistance = Infinity; // To store the smallest distance
+                let closestUser = null;  // To store the user with the smallest distance
 
+                // Loop through all users to calculate the distance and find the closest one
+                for (let user of data.users) {
+                    const donationAddress = user.address;
                     if (donationAddress) {
                         try {
                             // Get latitude and longitude for the donation address
                             const destinationCoords = await getCoordinatesFromAddress(donationAddress);
                             const userLatLng = { lat: userLocation.latitude, lng: userLocation.longitude };
 
-                            // Now calculate distance
                             calculateDistance(userLatLng, destinationCoords)
                                 .then(({ distance, duration }) => {
                                     setDistances((prevDistances) => ({
@@ -128,63 +131,101 @@ function Collections() {
                                     }));
                                 })
                                 .catch((error) => console.error(error));
+
+                            // Calculate the distance between the current user's location and the destination
+                            const { distance } = await calculateDistance(userLatLng, destinationCoords);
+
+                            // Compare to find the closest distance
+                            const numericalDistance = parseFloat(distance.replace(' km', ''));  // Parse the distance to a number
+                            if (numericalDistance < closestDistance) {
+                                closestDistance = numericalDistance;  // Update the closest distance
+                                closestUser = user;  // Update the closest user
+                            }
                         } catch (error) {
                             console.error('Error getting coordinates from address:', error);
                         }
                     }
-                });
+                }
+
+                // Set the closest user to the state
+                setClosestUser(closestUser);  // This will store the closest user
             }
 
-            fetchUsers();
+            fetchUsers();  // Call fetchUsers when userLocation is available
         } else {
             console.log("Waiting for user location...");
         }
     }, [userLocation]);  // Depend on userLocation to ensure we have the location
 
-    const handleClaimClick = (userId) => {
-        // Toggle address visibility when "Claim" button is clicked
-        setAddressRevealed(prevState => ({
-            ...prevState,
-            [userId]: !prevState[userId]
-        }));
+
+    // Function to show the map with closest user's address
+    const showMap = async (address) => {
+        const geocoder = new google.maps.Geocoder();
+        try {
+            const latLng = await new Promise((resolve, reject) => {
+                geocoder.geocode({ address: address }, (results, status) => {
+                    if (status === "OK") {
+                        resolve(results[0].geometry.location);
+                    } else {
+                        reject("Could not find location");
+                    }
+                });
+            });
+
+            const { Map } = await google.maps.importLibrary("maps");
+            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+            const map = new Map(document.getElementById("map"), {
+                center: latLng,
+                zoom: 16,
+                mapId: "MAP1", 
+            });
+
+            const marker = new AdvancedMarkerElement({
+                map,
+                position: latLng,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleClaimClick = () => {
+        if (closestUser) {
+            setAddressRevealed(prevState => ({
+                ...prevState,
+                [closestUser._id]: !prevState[closestUser._id]
+            }));
+            setShowMapFlag(true); // Set flag to show map when "Claim" is clicked
+            showMap(closestUser.address); // Call the function to show map
+        }
     };
 
     return (
         <div>
             <h1>Closest Available Donation</h1>
-            {users.length > 0 && userLocation ? (
+            {closestUser ? (
                 <div>
-                    {users
-                        .filter(user => user.numberOfCans > 0 && user.email !== JSON.parse(localStorage.getItem('user')).email)
-                        .map(user => {
-                            const donationAddress = user.address;
+                    <h2>From {closestUser.username}: {closestUser.numberOfCans} cans available</h2>
+                    <p>Distance: {distances[closestUser._id].distance} - Walk Time: {distances[closestUser._id].duration}</p>
+                    {/* Show address only after claiming */}
+                    <button onClick={() => handleClaimClick(closestUser._id)}>
+                        {addressRevealed[closestUser._id] ? 'Hide Address' : 'Claim'}
+                    </button>
 
-                            return (
-                                <div key={user._id}>
-                                    <p>{user.username} - {user.numberOfCans} cans available</p>
+                    {addressRevealed[closestUser._id] && <p>Address: {closestUser.address}</p>}
 
-                                    {/* Show distance */}
-                                    {distances[user._id] ? (
-                                        <p>Distance: {distances[user._id].distance} - Walk Time: {distances[user._id].duration}</p>
-                                    ) : (
-                                        <p>Calculating distance...</p>
-                                    )}
+                    {/* Display the map below */}
+                    
+                    {showMapFlag && <gmp-map center="44.233334, -76.500000" zoom="14" map-id="MAP1"style="height: 400px"></gmp-map> && <div id="map" style={{ height: '400px', width: '100%' }}></div>}
 
-                                    {/* Show address only after claiming */}
-                                    <button onClick={() => handleClaimClick(user._id)}>
-                                        {addressRevealed[user._id] ? 'Hide Address' : 'Claim'}
-                                    </button>
-
-                                    {addressRevealed[user._id] && <p>Address: {donationAddress}</p>}
-                                </div>
-                            );
-                        })}
                 </div>
             ) : (
                 <p>Loading...</p>
             )}
         </div>
     );
+
 }
 
 export default Collections;
