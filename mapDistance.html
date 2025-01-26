@@ -1,25 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+async function initMap() {
+    console.log("Maps JavaScript API loaded.");
+    }
+    
+    window.initMap = initMap;</script>
+
+
 <head>
     <meta charset="UTF-8">
     <title>Distance Calculator</title>
     <style>
-        body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
-        #geolocation { margin-top: 20px; font-weight: bold; }
-        input { width: 100%; margin: 10px 0; padding: 5px; }
-        #result { margin-top: 20px; font-weight: bold; }
+        body {
+            font-family: Arial;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
     <h2>Distance Calculator</h2>
-    <div id = "geolocation" type ="text" placeholder = "Allow permission">
-    <!--<input id="origin" type="text" placeholder="Origin Address"> -->
+    <div id="geolocation" type="text" placeholder="Allow permission">
+        <!--<input id="origin" type="text" placeholder="Origin Address"> -->
     <input id="destination" type="text" placeholder="Destination Address">
-    <button onclick="calculateDistance(x, 'destination', 'result')">Calculate Distance</button>
+    <button onclick="calculateDistance(pos, 'destination', 'result')">Calculate Distance</button>
     <div id="result"></div>
-    
-<script>
-        var x = {
+    <gmp-map center="44.233334, -76.500000" zoom="14" map-id="MAP1"style="height: 400px"></gmp-map>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+
+    <script>
+        var pos = {
             latitude: 0,
             longitude: 0
         };
@@ -28,49 +53,79 @@
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(logPosition);
             } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
+                pos.innerHTML = "Geolocation is not supported by this browser.";
             }
         }
 
         function logPosition(position) {
-            x.latitude = position.coords.latitude, 
-            x.longitude = position.coords.longitude;
-            console.log(x);
+            pos.latitude = position.coords.latitude;
+            pos.longitude = position.coords.longitude;
+            console.log(pos);
         }
 
         function addressAutocomplete(elementID) {
             const center = { lat: 44.233334, lng: -76.500000 }; //For Kingston
-            const defaultBounds = {  
+            const defaultBounds = {
                 north: center.lat + 0.1,
                 south: center.lat - 0.1,
                 east: center.lng + 0.1,
                 west: center.lng - 0.1,
             };
-
             const Input = document.getElementById(elementID);
-            new google.maps.places.Autocomplete(Input, {bounds: defaultBounds, types: ['address']});
+            new google.maps.places.Autocomplete(Input, { bounds: defaultBounds, types: ['address'] }); //Must be an address
         }
-        
+
         function initAutocomplete() {
             getLocation();
             addressAutocomplete('destination');
         }
         
+        async function showMap(address) {
+            const geocoder = new google.maps.Geocoder();
+
+            const latLng = await new Promise((resolve, reject) => { //Convert address to lat and long
+                geocoder.geocode({ address: address }, (results, status) => {
+                    if (status === "OK") {
+                        resolve(results[0].geometry.location);
+                    } else {
+                        reject("Could not find location");
+                    }
+                });
+            });
+
+            const { Map } = await google.maps.importLibrary("maps");
+            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+            const map = new Map(document.getElementById("map"), {
+                center: { lat: 44.233334, lng: -76.500000 }, //For kingston 
+                zoom: 14,
+                mapId: "MAP1", 
+            });
+
+            const marker = new AdvancedMarkerElement({
+                map,
+                position: latLng,
+            });
+            
+
+        }
+
 
         function calculateDistance(currPos, destinationID, resultID) {
-            const origin = {"lat": x.latitude , "lng": x.longitude};
+            const origin = { "lat": pos.latitude, "lng": pos.longitude }; //Current position
             const destination = document.getElementById(destinationID).value;
-            //const destination = document.getElementById(destinationID).value;
             const resultDiv = document.getElementById(resultID);
-            
+
             const service = new google.maps.DistanceMatrixService();
+            showMap(destination);
+
             service.getDistanceMatrix(
                 {
                     origins: [origin],
                     destinations: [destination],
                     travelMode: 'WALKING',
                     unitSystem: google.maps.UnitSystem.METRIC
-                }, 
+                },
                 (response, status) => {
                     if (status === 'OK') {
                         const distance = response.rows[0].elements[0].distance.text;
@@ -82,7 +137,25 @@
                 }
             );
         }
+
+        function closestAddress(addressList){
+            let closest = list[0];
+            let closestDistance = google.maps.geometry.spherical.computeDistanceBetween(origin, closest.geometry.location);
+            for (let i = 1; i < list.length; i++){
+                let distance = google.maps.geometry.spherical.computeDistanceBetween(origin, list[i].geometry.location);
+                if (distance < closestDistance){
+                    closest = list[i];
+                    closestDistance = distance;
+                }
+            }
+            return closest;
+        }
+    
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPHGXRODOE33zFmbI2l6OSgnkB9jhf8sQ&libraries=places&callback=initAutocomplete" async defer></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPHGXRODOE33zFmbI2l6OSgnkB9jhf8sQ&libraries=places,maps&callback=initAutocomplete"
+        async defer></script>
+    
 </body>
+
 </html>
