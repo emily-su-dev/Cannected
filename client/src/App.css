@@ -9,8 +9,24 @@ body {
   font-family: 'Verdana', sans-serif
 }
 
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; /* Remove default margins */
+}
+
+.content {
+  text-align: center; /* Center text inside the content */
+  padding: 20px; /* Optional padding */
+  background: white; /* Optional background for the content */
+  border-radius: 10px; /* Optional rounded corners */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for aesthetics */
+}
+
 h1 {
   color: #4e854c;
+  text-align: center;
 }
 
 button {
@@ -25,6 +41,10 @@ button {
 
 button:hover {
   background-color: #029e84;
+}
+
+.button-submit {
+
 }
 
 /* Style the description */
