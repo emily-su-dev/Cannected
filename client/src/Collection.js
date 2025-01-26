@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 function Collections() {
     const [users, setUsers] = useState([]);
@@ -7,6 +8,8 @@ function Collections() {
     const [distances, setDistances] = useState({}); // Store distances for each user based on their id
     const [closestUser, setClosestUser] = useState(null);  // Store the closest user
     const [showMapFlag, setShowMapFlag] = useState(false);  // Flag to display map
+    const [showDoneButton, setShowDoneButton] = useState(false); // Track if Done button is visible
+    const [claimButtonVisible, setClaimButtonVisible] = useState(true); // Track if claim button is visible
 
     useEffect(() => {
         // Check if the script is already loaded
@@ -178,7 +181,7 @@ function Collections() {
             const map = new Map(document.getElementById("map"), {
                 center: latLng,
                 zoom: 16,
-                mapId: "MAP1", 
+                mapId: "MAP1",
             });
 
             const marker = new AdvancedMarkerElement({
@@ -190,15 +193,43 @@ function Collections() {
         }
     };
 
-    const handleClaimClick = () => {
+    const handleClaimClick = async () => {
         if (closestUser) {
-            setAddressRevealed(prevState => ({
-                ...prevState,
-                [closestUser._id]: !prevState[closestUser._id]
-            }));
-            setShowMapFlag(true); // Set flag to show map when "Claim" is clicked
-            showMap(closestUser.address); // Call the function to show map
+            // Update the user's numberOfCans to 0 in the backend
+            try {
+                const response = await fetch(`/api/users/${closestUser._id}/update-cans`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ numberOfCans: 0 }),  // Set the numberOfCans to 0
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update number of cans');
+                }
+
+                // Update state
+                setAddressRevealed(prevState => ({
+                    ...prevState,
+                    [closestUser._id]: !prevState[closestUser._id]
+                }));
+                setShowMapFlag(true); // Show the map after claiming
+                setShowDoneButton(true); // Show the Done button after claiming
+                setClaimButtonVisible(false); // Hide claim button after clicking it
+
+                // Call the function to show the map
+                showMap(closestUser.address);
+            } catch (error) {
+                console.error('Error updating numberOfCans:', error);
+            }
         }
+    };
+
+    const navigate = useNavigate();
+
+    const handleDoneClick = () => {
+        navigate('/profile');  // Navigate to the profile page when Done is clicked
     };
 
     return (
@@ -208,17 +239,23 @@ function Collections() {
                 <div>
                     <h2>From {closestUser.username}: {closestUser.numberOfCans} cans available</h2>
                     <p>Distance: {distances[closestUser._id].distance} - Walk Time: {distances[closestUser._id].duration}</p>
-                    {/* Show address only after claiming */}
-                    <button onClick={() => handleClaimClick(closestUser._id)}>
-                        {addressRevealed[closestUser._id] ? 'Hide Address' : 'Claim'}
-                    </button>
+                    {/* Only show Claim button if it's visible */}
+                    {claimButtonVisible && (
+                        <button onClick={handleClaimClick}>
+                            Claim
+                        </button>
+                    )}
 
                     {addressRevealed[closestUser._id] && <p>Address: {closestUser.address}</p>}
 
                     {/* Display the map below */}
-                    
-                    {showMapFlag && <gmp-map center="44.233334, -76.500000" zoom="14" map-id="MAP1"style="height: 400px"></gmp-map> && <div id="map" style={{ height: '400px', width: '100%' }}></div>}
 
+                    {showMapFlag && <gmp-map center="44.233334, -76.500000" zoom="14" map-id="MAP1" style="height: 400px"></gmp-map> && <div id="map" style={{ height: '400px', width: '100%' }}></div>}
+
+                    {/* Show Done button after claiming */}
+                    {showDoneButton && (
+                        <button onClick={handleDoneClick}>Done</button>
+                    )}
                 </div>
             ) : (
                 <p>Loading...</p>
