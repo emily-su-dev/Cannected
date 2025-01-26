@@ -1,13 +1,14 @@
 // Signup.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     // Step 1: Define the state for form inputs
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [placeID, setPlaceID] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate(); 
 
     // Step 2: Create the submit function
     const handleSubmit = async (e) => {
@@ -18,8 +19,7 @@ function SignUp() {
             username,
             email,
             password,
-            userType: 'donor', // Default userType is donor
-            placeID,
+            placeID: null,
             numberOfCans: 0, // Default numberOfCans is 0
         };
 
@@ -36,6 +36,7 @@ function SignUp() {
             const data = await response.json();
             if (response.status === 201) {
                 setMessage('Account created successfully!');
+                navigate('/login');
             } else {
                 setMessage(`Error: ${data.message}`);
             }
@@ -76,16 +77,7 @@ function SignUp() {
                         required
                     />
                 </div>
-                <div>
-                    <label>Home Address</label>
-                    <input
-                        type="text"
-                        value={placeID}
-                        onChange={(e) => setPlaceID(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Donor</button>
+                <button type="submit">Sign Up</button>
             </form>
             {message && <p>{message}</p>}
         </div>

@@ -1,11 +1,13 @@
 // Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     // Step 1: Define state for form inputs
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate(); 
 
     // Step 2: Create the submit function
     const handleSubmit = async (e) => {
@@ -28,7 +30,13 @@ function Login() {
 
             const data = await response.json();
             if (response.status === 200) {
+                // On successful login, store user data in localStorage
+                localStorage.setItem('user', JSON.stringify(data.user));
+
                 setMessage('Login successful!');
+                
+                // Redirect to profile page
+                navigate('/profile');
             } else {
                 setMessage(data.message);
             }

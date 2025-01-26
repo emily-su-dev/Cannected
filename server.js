@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 // Create a new user
 app.post('/api/users', async (req, res) => {
-    const { username, email, password, userType, placeID, numberOfCans } = req.body;
+    const { username, email, password, placeID } = req.body;
 
     // Check if the email already exists
     const existingUser = await User.findOne({ email });
@@ -47,8 +47,7 @@ app.post('/api/users', async (req, res) => {
         username,
         email,
         password,  // You might want to hash the password before saving it
-        userType,
-        placeID,
+        placeID: placeID || null,
         numberOfCans: 0  // Default numberOfCans is 0
     });
 
@@ -80,7 +79,10 @@ app.post('/api/login', async (req, res) => {
         }
 
         // If email and password are correct
-        res.status(200).json({ message: 'Login successful', user });
+        res.status(200).json({
+            message: 'Login successful',
+            user: { username: user.username, email: user.email, placeID: user.placeID }
+        });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
