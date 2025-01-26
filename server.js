@@ -77,6 +77,26 @@ app.post('/api/users', async (req, res) => {
     }
 });
 
+app.put('/api/users/:userId/update-cans', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { numberOfCans } = req.body;
+
+        // Find the user and update the numberOfCans
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.numberOfCans = numberOfCans;  // Update numberOfCans to 0
+        await user.save();  // Save changes to the database
+
+        res.status(200).json({ message: 'User updated successfully', user });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating user', error: error.message });
+    }
+});
+
 // Update the number of cans donated by a user
 app.put('/api/users/:id/donate', async (req, res) => {
     const { id } = req.params;
