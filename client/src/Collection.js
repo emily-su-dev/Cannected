@@ -23,17 +23,28 @@
         );
     }
 }*/
+import './index.css';
 
-function Collection(){
+function Collection(props){
     
     return (
 
         <div>
-            <p style="color: green; font-size: 20px">YOU ARE CURRENTLY COLLECTING</p>
+            <body>
+                <t>YOU ARE CURRENTLY COLLECTING</t>
+                <br />
+                <br />
+                <br />
+                <p>This pickup is {props.minutes} minutes away with {props.cans} cans</p>
+                <br />
+                <br />
+                <br />
+                <button type="button" style={{ backgroundColor: 'green', color: 'white' }} onClick={click} >ACCEPT</button>
+                <br />
+                <button type="button" style={{ backgroundColor: 'red', color: 'white' }} onClick={click}>DENY</button>
 
-            <p>This pickup is {props.minutes} minutes away with {props.cans} cans</p>
-            <button type="button" color="red" onClick={click}>ACCEPT</button>
-            <button type="button" color="red" onClick={click}>DENY</button>
+            </body>
+            
         </div>
     );
 }
