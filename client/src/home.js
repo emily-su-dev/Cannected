@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import { useNavigate } from 'react-router-dom';
-import LoginButton from './auth0Login';
 
 function Home() {
     const navigate = useNavigate(); 
     const handleNavigateToLogin = () => {
         navigate("/login");
+      };
+      const handleNavigateToSignUp = () => {
+        navigate("/signup");
       };
 
     return (
@@ -15,6 +17,8 @@ function Home() {
             <p class="description">Talk about problem</p>
 
             <button onClick={handleNavigateToLogin}>Log In</button>
+            <button onClick={handleNavigateToSignUp}>Sign Up</button>
+
         </div>
     )
 }
