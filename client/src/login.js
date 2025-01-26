@@ -1,6 +1,8 @@
 // Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import './login.css';
+import SignUp from './signup';
 
 function Login() {
     // Step 1: Define state for form inputs
@@ -48,29 +50,46 @@ function Login() {
 
     return (
         <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+        
+            <div class="login-container">
+                <h1>Log in</h1>
+                <div class="divider">
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
+                
+                <div class="body">            
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Email </label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Password </label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <button class="submit" type="submit">Log In</button>
+                    </div>
+                </form>
                 </div>
-                <button type="submit">Login</button>
-            </form>
-            {message && <p>{message}</p>}
+                {message && <p>{message}</p>}
+
+                <div class="create-account">
+                    <p>No account?
+                    <Link to='/signup'> Create one </Link>
+                    </p>
+                </div>
+            </div>
+    
         </div>
     );
 }

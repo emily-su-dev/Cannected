@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Verdana", sans-serif;
+    background: #def8f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+header {
+position: absolute; 
+top: 0;
+left: 0;
+width: 100%; 
+display: flex;
+align-items: flex-start; 
+padding: 35px 60px;
+background-color: transparent; 
+}
+.logo {
+font-size: 0.9rem;
+color: black;
+font-weight: bold;
+font-family: "Unbounded", serif;
+text-align: left;
+}
+.logo a {
+text-decoration: none; 
+color: inherit; 
+font-size: inherit; 
+}
+.login-container {
+    width: 350px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.login-container h1 {
+    margin-bottom: 10px;
+    font-family: "Verdana", sans-serif;
+    font-optical-sizing: auto;
+    color: #333;
+}
+.login-container button.google-login {
+    font-family: "Verdana", sans-serif;
+    background-color: white;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container button.google-login img {
+    margin-right: 10px;
+}
+.login-container .divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.login-container .divider::before,
+.login-container .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+}
+.login-container .divider span {
+    margin: 0 10px;
+    color: #888;
+}
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 0.85rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.login-container .forgot-password {
+    text-align: right;
+    margin-bottom: 15px;
+}
+.login-container .forgot-password a {
+    color: #4caf50;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.login-container button.submit {
+    font-family: "Verdana", sans-serif;
+    background-color: #00ba9b;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+.login-container button.submit:hover {
+    background-color: #029e84;
+}
+.login-container .create-account {
+    margin-top: 15px;
+}
+.login-container .create-account a {
+    color: rgb(58, 126, 88);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.login-container .create-account a:hover {
+    text-decoration: underline;
+}

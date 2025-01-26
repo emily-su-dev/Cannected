@@ -29,9 +29,9 @@ function Collection(){
     return (
 
         <div>
-            <p style="color: green; font-size: 20px">YOU ARE CURRENTLY COLLECTING</p>
+            <p>YOU ARE CURRENTLY COLLECTING</p>
 
-            <p>This pickup is {props.minutes} minutes away with {props.cans} cans</p>
+            {/* <p>This pickup is {props.minutes} minutes away with {props.cans} cans</p> */}
             <button type="button" color="red" onClick={click}>ACCEPT</button>
             <button type="button" color="red" onClick={click}>DENY</button>
         </div>
