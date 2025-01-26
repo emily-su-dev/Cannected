@@ -44,23 +44,31 @@ function Profile() {
     };
 
     return (
-
-        <div className="prof-container">
-            <h1 className="prof-title">Welcome</h1>
-            <h2 className="prof-subtitle">to Cannected, {user?.username}!</h2>
-            <p className="prof-description">Talk about some user information</p>
-            <div className="prof-buttons-container">
-                <button className="prof-button" onClick={handleDonateClick}>Donate</button>
-                <button className="prof-button" onClick={handleCollectClick}>Collect</button>
+        <div>
+            <div className="prof-title-container">
+                <h2 className="prof-subtitle">Hi, {user?.username}!</h2>
+                <h2 className="prof-subtitle">Welcome to</h2>
+                <p className="prof-title">Cannected</p>
+                <p> </p>
             </div>
-            {user? (
-                <div>
-                    {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} cans at {user.address}!</p>}
+
+            <div className="prof-container">
+                
+                <p className="prof-description">Talk about some user information</p>
+                <div className="prof-buttons-container">
+                    <button className="prof-button" onClick={handleDonateClick}>Donate</button>
+                    <button className="prof-button" onClick={handleCollectClick}>Collect</button>
                 </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+                {user? (
+                    <div>
+                        {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} cans at {user.address}!</p>}
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </div>
         </div>
+        
     );
 }
 

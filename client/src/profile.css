@@ -1,7 +1,8 @@
 h2 {
-    color:rgb(217, 236, 230);
+    color:#332e58;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-  
+    text-align: center;
+    font-size: 20px;
 }
 
 .prof-container {
@@ -13,16 +14,22 @@ h2 {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
+.prof-title-container {
+    margin: 0; /* Ensure no extra margin is added */
+    padding: 0; /* Ensure no padding is added */
+}
+
 /* Styling for the title */
 .prof-title {
+    margin-top: 0; /* Remove any top margin */
     font-size: 46px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     letter-spacing: 2px;
     text-transform: uppercase;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #00b894;
+    color: #fcfffe;
 }
 
 /* Description text styling */
