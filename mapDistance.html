@@ -5,7 +5,6 @@
 async function initMap() {
     console.log("Maps JavaScript API loaded.");
     }
-    
     window.initMap = initMap;</script>
 
 
@@ -36,7 +35,6 @@ async function initMap() {
 <body>
     <h2>Distance Calculator</h2>
     <div id="geolocation" type="text" placeholder="Allow permission">
-        <!--<input id="origin" type="text" placeholder="Origin Address"> -->
     <input id="destination" type="text" placeholder="Destination Address">
     <button onclick="calculateDistance(pos, 'destination', 'result')">Calculate Distance</button>
     <div id="result"></div>
@@ -130,6 +128,7 @@ async function initMap() {
             const service = new google.maps.DistanceMatrixService();
             showMap(destination);
             initClosest(destination);
+            
 
 
             service.getDistanceMatrix(
@@ -151,7 +150,6 @@ async function initMap() {
             );
         }
 
-        
         async function latLngDistance(latLng, address) {
             latLng2 = await addressToLatLng(address);
             latLng3 = new google.maps.LatLng(latLng.latitude, latLng.longitude);
@@ -160,11 +158,12 @@ async function initMap() {
 
         async function initClosest(address) {
             const distanceDropoff = document.getElementById("closestDropoff");
-            const closest = await latLngDistance(pos, address);
-            distanceDropoff.innerHTML = `Closest Dropoff: ${closest}`;
+            const closest = await closestPosting(pos);
+
+            distanceDropoff.innerHTML = `Closest Dropoff: ${closest.address}`;
         }
-/*
-        async function closestPosting(){
+
+        async function closestPosting(latLng) {
             list = [
                 {
                     "_id": "5e8c1d5b0190b214360dc0f1",
@@ -179,7 +178,7 @@ async function initMap() {
                     "username": "b24",
                     "email": "b24@gmail.com",
                     "password": "lol",
-                    "address": "",
+                    "address": "371 Yonge Street, Kingston, ON, Canada",
                     "numberOfCans": 6
                 },
                 {
@@ -217,28 +216,22 @@ async function initMap() {
             ];
             let closest = list[0];
             let closestDistance = 999999;
-            //let closestDistance = google.maps.geometry.spherical.computeDistanceBetween(origin, closest.geometry.location);
+         
             for (let i = 0; i < list.length; i++){
                 if (list[i].numberOfCans > 0 && list[i].address) {
-                    try {
-                        const latLng = addresssToLatLng(list[i].address);
-                        console.log(latLng);
-                        const distance = google.maps.geometry.spherical.computeDistanceBetween(origin, latLng);
-                        
-                        if (distance < closestDistance) {
-                            closest = list[i];
-                            closestDistance = distance;
-                        }
-                    } catch (error) {
-                        console.error(`Error processing latLng: ${list[i].address}`, error);
-                    }
+                    const distance = await latLngDistance(latLng, list[i].address);
+                    if (distance < closestDistance) {
+                        closest = list[i];
+                        closestDistance = distance;
+                    }   
+
                 }
                 
             }
             return closest;
             
         }
-    */
+    
     </script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPHGXRODOE33zFmbI2l6OSgnkB9jhf8sQ&libraries=places,maps&callback=initAutocomplete"
