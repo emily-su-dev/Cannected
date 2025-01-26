@@ -60,7 +60,7 @@ function Profile() {
                     <button className="prof-button" onClick={handleCollectClick}>Collect</button>
                 </div>
                 {user? (
-                    <div>
+                    <div className="prof-description">
                         {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} cans at {user.address}!</p>}
                     </div>
                 ) : (
