@@ -1,4 +1,5 @@
 
+
 /*class Collection {
     constructor() {
 
@@ -23,25 +24,26 @@
         );
     }
 }*/
+
 import './style.css';
 
 function Collection(props){
-    
+
     return (
 
         <div>
             <body>
-                <t>YOU ARE CURRENTLY COLLECTING</t>
+                <t>COLLECTIONS</t>
+                <br />
+                <h1>YOU ARE CURRENTLY COLLECTING</h1>
                 <br />
                 <br />
                 <br />
-                <p>This pickup is {props.minutes} minutes away with {props.cans} cans</p>
+                <h2>This pickup is {props.minutes} minutes away with {props.cans} cans</h2>
                 <br />
                 <br />
                 <br />
-                <button type="button" style={{ backgroundColor: 'green', color: 'white' }} onClick={click} >ACCEPT</button>
-                <br />
-                <button type="button" style={{ backgroundColor: 'red', color: 'white', margin: 20}} onClick={click}>DENY</button>
+                <button1 type="button" onClick={click} >ACCEPT</button1>
 
             </body>
             
