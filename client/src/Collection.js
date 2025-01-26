@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import './Collection.css';
+
 
 function Collections() {
     const [users, setUsers] = useState([]);
@@ -234,14 +236,16 @@ function Collections() {
 
     return (
         <div>
-            <h1>Closest Available Donation</h1>
+            <h1>Closest Donation:</h1>
             {closestUser ? (
                 <div>
+                    <div className = "container">
                     <h2>From {closestUser.username}: {closestUser.numberOfCans} cans available</h2>
-                    <p>Distance: {distances[closestUser._id].distance} - Walk Time: {distances[closestUser._id].duration}</p>
+                    </div>
+                    <p>Distance: {distances[closestUser._id].distance} </p><p> Walk Time: {distances[closestUser._id].duration}</p>
                     {/* Only show Claim button if it's visible */}
                     {claimButtonVisible && (
-                        <button onClick={handleClaimClick}>
+                        <button class="collect-button" onClick={handleClaimClick}>
                             Claim
                         </button>
                     )}
@@ -254,11 +258,11 @@ function Collections() {
 
                     {/* Show Done button after claiming */}
                     {showDoneButton && (
-                        <button onClick={handleDoneClick}>Done</button>
+                        <button class="collect-button" onClick={handleDoneClick}>Done</button>
                     )}
                 </div>
             ) : (
-                <p>Loading...</p>
+                <p>Loading donations...</p>
             )}
         </div>
     );

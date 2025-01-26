@@ -54,7 +54,7 @@ function Profile() {
 
             <div className="prof-container">
                 
-                <p className="prof-description">Talk about some user information</p>
+                <p className="prof-description">Select your cannection method</p>
                 <div className="prof-buttons-container">
                     <button className="prof-button" onClick={handleDonateClick}>Donate</button>
                     <button className="prof-button" onClick={handleCollectClick}>Collect</button>
