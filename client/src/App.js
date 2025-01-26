@@ -5,15 +5,18 @@ import AddAddress from './AddAddress';  // Add address page
 import Donate from './donate';  // Donate page
 import Profile from './profile';
 import SignUp from './signup';
+import Home from './home';
+import Collection from './Collection';
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/add-address" element={<AddAddress />} />
       <Route path="/donate" element={<Donate />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/" element={<SignUp />} />
+      <Route path="/" element={<Home />} />
     </Routes>
   );
 }
