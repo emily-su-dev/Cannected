@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate for routing
+import './profile.css';
 
 function Profile() {
     const [user, setUser] = useState(null);
@@ -43,10 +44,15 @@ function Profile() {
     };
 
     return (
-        <div>
-            <h1>Welcome, {user?.username}!</h1>
-            <button onClick={handleDonateClick}>Donate</button>
-            <button onClick={handleCollectClick}>Collect</button>
+
+        <div className="prof-container">
+            <h1 className="prof-title">Welcome</h1>
+            <h2 className="prof-subtitle">to Cannected, {user?.username}!</h2>
+            <p className="prof-description">Talk about some user information</p>
+            <div className="prof-buttons-container">
+                <button className="prof-button" onClick={handleDonateClick}>Donate</button>
+                <button className="prof-button" onClick={handleCollectClick}>Collect</button>
+            </div>
         </div>
     );
 }
