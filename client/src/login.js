@@ -67,7 +67,7 @@ function Login() {
     return (
       <div>
         <body>
-          <h1>LOGIN</h1>
+          <h1>LOG IN</h1>
           <p>Enter you information below to </p>
             <p>login to your account.</p>
 
