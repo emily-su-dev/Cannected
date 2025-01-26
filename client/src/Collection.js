@@ -41,7 +41,7 @@ function Collection(props){
                 <br />
                 <button type="button" style={{ backgroundColor: 'green', color: 'white' }} onClick={click} >ACCEPT</button>
                 <br />
-                <button type="button" style={{ backgroundColor: 'red', color: 'white' }} onClick={click}>DENY</button>
+                <button type="button" style={{ backgroundColor: 'red', color: 'white', margin: 20}} onClick={click}>DENY</button>
 
             </body>
             
