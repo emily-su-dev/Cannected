@@ -1,23 +1,40 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    /* Center the container vertically and horizontally */
+    background: linear-gradient(135deg, #332e58, #6c5ce7);
+    /* Gradient background for the page */
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100vw; /* Full viewport width */
+    margin: 0px;
+    
+}
+
+
 .don-container {
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background for the container */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent dark background for the container */
     border-radius: 15px;
     padding: 40px;
     width: 80%;
     max-width: 400px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
 }
 
-.don-title-container {
-    margin: 0; /* Ensure no extra margin is added */
-    padding: 0; /* Ensure no padding is added */
-}
-
-/* Styling for the title */
 .don-title {
-    margin-top: 0; /* Remove any top margin */
-    font-size: 46px;
+    margin-top: 250px;
+    font-size: 24px;
     font-weight: 600;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     letter-spacing: 2px;
     text-transform: uppercase;
     text-align: center;
@@ -25,13 +42,41 @@
     color: #fcfffe;
 }
 
-/* Description text styling */
 .don-description {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+    font-size: 1rem;
+    margin-bottom: 20px;
     color: #dfe6e9;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.address-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.don-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.don-input::placeholder {
+    color: #b2bec3;
+}
+
+.don-input:focus {
+    border: 2px solid #00ba9b;
+    box-shadow: 0 0 10px rgba(0, 186, 155, 0.5);
 }
 
 /* Styling for buttons */
@@ -39,10 +84,12 @@
     padding: 15px 25px;
     font-size: 1rem;
     margin: 10px;
-    background-color: #00ba9b; /* Button background color */
+    background-color: #00ba9b;
+    /* Button background color */
     color: #fff;
     border: none;
-    border-radius: 30px; /* Rounded corners */
+    border-radius: 30px;
+    /* Rounded corners */
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
@@ -53,68 +100,9 @@
     transform: scale(1.05);
 }
 
-/* Button for sign up with a different color */
-.don-button:nth-child(2) {
-    background-color: #6c5ce7;
-}
-
-.don-button:nth-child(2):hover {
-    background-color: #5e4bd6;
-}
-
 .don-buttons-container {
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
-
-/* home.css */
-/* .home-container {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 15px;
-    padding: 40px;
-    width: 80%;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.home-title {
-    font-size: 3rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.home-description {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: #dfe6e9;
-}
-
-.home-button {
-    padding: 15px 25px;
-    font-size: 1rem;
-    margin: 10px;
-    background-color: #00ba9b;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.home-button:hover {
-    background-color: #029e84;
-    transform: scale(1.05);
-}
-
-.home-button:nth-child(2) {
-    background-color: #6c5ce7;
-}
-
-.home-button:nth-child(2):hover {
-    background-color: #5e4bd6;
-} */

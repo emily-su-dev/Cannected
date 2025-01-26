@@ -235,22 +235,23 @@ function Collections() {
     };
 
     return (
-        <div>
-            <h1>Closest Donation:</h1>
+        <div className="big-container">
+            <h1 className="col-title">Closest Donation:</h1>
             {closestUser ? (
-                <div>
-                    <div className = "container">
-                    <h3>From {closestUser.username}: {closestUser.numberOfCans} cans available</h3>
+                <div className="container">
+                    <div className = "post-container">
+                        <h3>From {closestUser.username}: {closestUser.numberOfCans} cans available</h3>
                     </div>
-                    <p>Distance: {distances[closestUser._id].distance} </p><p> Walk Time: {distances[closestUser._id].duration}</p>
+                    <p className="p">Distance: {distances[closestUser._id].distance} </p>
+                    <p className="p"> Walk Time: {distances[closestUser._id].duration}</p>
                     {/* Only show Claim button if it's visible */}
                     {claimButtonVisible && (
                         <button class="collect-button" onClick={handleClaimClick}>
                             Claim
                         </button>
                     )}
-
-                    {addressRevealed[closestUser._id] && <p>Address: {closestUser.address}</p>}
+                
+                    {addressRevealed[closestUser._id] && <p className="p">Address: {closestUser.address}</p>}
 
                     {/* Display the map below */}
 
@@ -258,12 +259,17 @@ function Collections() {
 
                     {/* Show Done button after claiming */}
                     {showDoneButton && (
+                        <div className="button-container">
                         <button class="collect-button" onClick={handleDoneClick}>Done</button>
+                        </div>
                     )}
                 </div>
             ) : (
-                <p>Loading donations...</p>
+                <p className="p">Loading donations...</p>
             )}
+            <div className="placeholder">
+
+            </div>
         </div>
     );
 

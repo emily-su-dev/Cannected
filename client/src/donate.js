@@ -53,18 +53,22 @@ function Donate() {
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h1 className="don-title">Donate Cans</h1>
-      <form onSubmit={handleSubmit}>
-        <label className="don-description">Number of Cans:</label>
-        <input
-          type="number"
-          value={numberOfCans}
-          onChange={(e) => setNumberOfCans(e.target.value)}  // Keep as string to allow empty input
-          required
-        />
-        <button type="submit">Make a can posting!</button>
-      </form>
+        <div className="don-container">
+          <form onSubmit={handleSubmit}>
+            <label className="don-description">Number of Cans:</label>
+            <label></label>
+            <input className="address-form"
+              type="number"
+              value={numberOfCans}
+              onChange={(e) => setNumberOfCans(e.target.value)}  // Keep as string to allow empty input
+              required
+            />
+            <p></p>
+            <button type="submit" className="don-button">Make a can posting!</button>
+          </form>
+        </div>
     </div>
   );
 }

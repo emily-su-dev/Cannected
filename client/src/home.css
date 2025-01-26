@@ -30,14 +30,16 @@ body {
     width: 80%;
     max-width: 400px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: auto;
+
 }
 
 /* Styling for the title */
 .home-title {
-    margin-top: 0;
-    font-size: 46px;
+    margin-top: 10;
+    font-size: 36px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     text-align: center;
@@ -48,7 +50,7 @@ body {
 /* Description text styling */
 .home-description {
     font-size: 0.9rem;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     color: #dfe6e9;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;

@@ -53,7 +53,7 @@ function Profile() {
 
             <div className="prof-container">
                 
-                <p className="prof-description">Select your cannection method</p>
+                <p className="prof-description">Select your CANnection method</p>
                 <div className="prof-buttons-container">
                     <button className="prof-button" onClick={handleDonateClick}>Donate</button>
                     <button className="prof-button" onClick={handleCollectClick}>Collect</button>
@@ -63,7 +63,7 @@ function Profile() {
                         {user.numberOfCans > 0 && <p>You have a posting for {user.numberOfCans} can(s) at {user.address}!</p>}
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <p className="prof-description">Loading...</p>
                 )}
             </div>
         </div>

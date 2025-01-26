@@ -40,8 +40,12 @@ header {
 .create-account {
     margin-top: 15px;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 
+}
+.create-account n {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:black;
 }
 .create-account a {
     color: rgb(75, 150, 107);
