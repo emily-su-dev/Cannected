@@ -49,49 +49,108 @@ function Login() {
     };
 
     return (
-        <div>
         
-            <div class="login-container">
-                <h1>Log in</h1>
-                <div class="divider">
-                </div>
+        
+            <div style={styles.container}>
+            <h2 style={styles.title}>Log In</h2>
+            
                 
-                <div class="body">            
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Email </label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+
+                    <div style={styles.inputGroup}>
+                    <label htmlFor="email" style={styles.label}>Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        style={styles.input}
+                        required
+                    />
                     </div>
-                    <div>
-                        <label>Password </label>
+
+                    <div style={styles.inputGroup}>
+                        <label htmlFor="password" style={styles.label}>Password:</label>
                         <input
                             type="password"
+                            id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            style={styles.input}
                             required
                         />
                     </div>
+                    
                     <div>
-                        <button class="submit" type="submit">Log In</button>
+                    <button type="submit" style={styles.button}>Log In</button>
                     </div>
                 </form>
-                </div>
                 {message && <p>{message}</p>}
 
                 <div class="create-account">
-                    <p>No account?
-                    <Link to='/signup'> Create one </Link>
-                    </p>
+                    <p>No account?</p>
+                    <p><Link to='/signup'>Create one</Link></p>
                 </div>
             </div>
     
-        </div>
+        
     );
 }
+
+
+const styles = {
+    container: {
+        padding: '50px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',  // Centers vertically
+        alignItems: 'center',  // Centers horizontally
+        backgroundColor: '#ffffff',
+        width: '60%',  // Make container 60% of the screen width
+        maxWidth: '600px',  // Max width to prevent the container from getting too wide
+        boxShadow: '0 4px 8px rgba(129, 141, 153, 0.3)', 
+        borderRadius: '10px',  // Rounded corners
+    },
+    title: {
+      textAlign: 'center',
+
+      marginBottom: '40px',
+      fontFamily: 'Verdana, sans-serif',
+      color: '#4e854c',
+      fontSize: '46px',
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '300px',
+    },
+    inputGroup: {
+      marginBottom: '15px',
+    },
+    label: {
+      display: 'block',
+      marginBottom: '5px',
+      fontSize: '14px',
+      fontFamily: 'Verdana, sans-serif',
+    },
+    input: {
+      width: '90%',
+      padding: '8px',
+      fontSize: '14px',
+      borderRadius: '4px',
+      border: '1px solid #ccc',
+    },
+    button: {
+      width: '100%',
+      padding: '10px',
+      backgroundColor: '#00ba9b',
+      color: 'white',
+      fontSize: '16px',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
+    },
+  };
+  
 
 export default Login;
