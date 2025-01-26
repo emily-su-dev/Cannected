@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate for routing
+import './AddAddress.css';
 
 function AddAddress() {
     useEffect(() => {
@@ -73,7 +74,6 @@ function AddAddress() {
                     loggedUser.address = address; // Update localStorage with the new address
                     localStorage.setItem('user', JSON.stringify(loggedUser));
 
-                    alert('Address added successfully!');
                     navigate('/donate');  // Redirect to the donate page
                 } else {
                     alert(data.message || 'Failed to update address');
@@ -88,21 +88,30 @@ function AddAddress() {
     };
 
     return (
-        <div>
-            <h1>Add Your Address - This is the address that will be used when you choose to donate your cans</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    id="address"
-                    type="text"
-                    placeholder="Enter your address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                />
-                <button type="submit">Submit</button>
-            </form>
+        <div className="page-container">
+            <div className="addr-container">
+                <h2 className="addr-title">Add Your Address</h2>
+                <p className="addr-description">
+                    This address will be used when you choose to donate your cans.
+                </p>
+                <form className="address-form" onSubmit={handleSubmit}>
+                    <input
+                        id="address"
+                        type="text"
+                        className="addr-input"
+                        placeholder="Enter your address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                    />
+                    <div className="addr-buttons-container">
+                        <button type="submit" className="addr-button">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
+
 }
 
 export default AddAddress;

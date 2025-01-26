@@ -1,0 +1,97 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Center the container vertically and horizontally */
+    background: linear-gradient(135deg, #332e58, #6c5ce7);
+    /* Gradient background for the page */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.addr-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent dark background for the container */
+    border-radius: 15px;
+    padding: 40px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-top: -40px;
+}
+
+.addr-title {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fcfffe;
+}
+
+.addr-description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #dfe6e9;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.address-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addr-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.addr-input::placeholder {
+    color: #b2bec3;
+}
+
+.addr-input:focus {
+    border: 2px solid #00ba9b;
+    box-shadow: 0 0 10px rgba(0, 186, 155, 0.5);
+}
+
+/* Styling for buttons */
+.addr-button {
+    padding: 15px 25px;
+    font-size: 1rem;
+    margin: 10px;
+    background-color: #00ba9b;
+    /* Button background color */
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Button hover effects */
+.addr-button:hover {
+    background-color: #029e84;
+    transform: scale(1.05);
+}
+
+.addr-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

@@ -240,7 +240,7 @@ function Collections() {
             {closestUser ? (
                 <div>
                     <div className = "container">
-                    <h2>From {closestUser.username}: {closestUser.numberOfCans} cans available</h2>
+                    <h3>From {closestUser.username}: {closestUser.numberOfCans} cans available</h3>
                     </div>
                     <p>Distance: {distances[closestUser._id].distance} </p><p> Walk Time: {distances[closestUser._id].duration}</p>
                     {/* Only show Claim button if it's visible */}
