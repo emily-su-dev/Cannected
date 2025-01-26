@@ -1,15 +1,23 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';  // Correctly import BrowserRouter, Routes, and Route
-import Login from './login';  // Import Login component
-import Profile from './profile';  // Import Profile component
+import { Routes, Route } from 'react-router-dom';
+import Login from './login';
+import AddAddress from './AddAddress';  // Add address page
+import Donate from './donate';  // Donate page
+import Profile from './profile';
 import SignUp from './signup';
+import Home from './home';
+import Collection from './Collection';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />  {/* Default route */}
-      <Route path="/login" element={<Login />} />  {/* Login route */}
-      <Route path="/profile" element={<Profile />} />  {/* Profile route */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/add-address" element={<AddAddress />} />
+      <Route path="/donate" element={<Donate />} />
+      <Route path="/Collection" element={<Collection />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/" element={<Home />} />
     </Routes>
   );
 }

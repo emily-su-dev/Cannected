@@ -19,7 +19,7 @@ function SignUp() {
             username,
             email,
             password,
-            placeID: null,
+            address: null,
             numberOfCans: 0, // Default numberOfCans is 0
         };
 

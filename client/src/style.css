@@ -1,0 +1,22 @@
+
+body{
+    font-family: Times New Roman, sans-serif;
+    background-color: lightblue;
+    margin: 10;
+    padding: 10;
+   }
+t{
+    color: navy;
+    margin: 20;
+    font-size: 20px;
+}   
+h1{
+    color: green;
+    text-align: left;
+    font-size: 15px;
+}
+h2{
+    color: red;
+    text-align: right;
+    font-size: 15px;
+}

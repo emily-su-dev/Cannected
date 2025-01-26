@@ -32,9 +32,26 @@ app.get('/', (req, res) => {
     res.send('Hello from the backend!');
 });
 
+// Fetch users API endpoint
+app.post('/api/users/postings', async (req, res) => {
+    try {
+        const { email } = req.body;  // Extract the email from the body of the request
+
+        // Find users who have more than 0 cans and exclude the logged-in user's email
+        const users = await User.find({
+            numberOfCans: { $gt: 0 },  // Only users who have cans to donate
+            email: { $ne: email },  // Exclude the logged-in user's email
+        });
+
+        res.status(200).json({ users });  // Send the users as a response
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching users', error: error.message });
+    }
+});
+
 // Create a new user
 app.post('/api/users', async (req, res) => {
-    const { username, email, password, placeID } = req.body;
+    const { username, email, password, address } = req.body;
 
     // Check if the email already exists
     const existingUser = await User.findOne({ email });
@@ -47,7 +64,7 @@ app.post('/api/users', async (req, res) => {
         username,
         email,
         password,  // You might want to hash the password before saving it
-        placeID: placeID || null,
+        address: address || null,
         numberOfCans: 0  // Default numberOfCans is 0
     });
 
@@ -57,6 +74,68 @@ app.post('/api/users', async (req, res) => {
         res.status(201).json({ message: 'User created successfully', user: newUser });
     } catch (error) {
         res.status(400).json({ message: 'Error creating user', error: error.message });
+    }
+});
+
+// Update the number of cans donated by a user
+app.put('/api/users/:id/donate', async (req, res) => {
+    const { id } = req.params;
+    const { numberOfCans } = req.body;
+
+    try {
+        const user = await User.findById(id);  // Find user by ID
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.numberOfCans += numberOfCans;  // Update the number of cans
+        await user.save();  // Save updated user to database
+
+        res.status(200).json({ message: 'Donation successful', user });
+    } catch (error) {
+        res.status(500).json({ message: 'Error updating donation', error: error.message });
+    }
+});
+
+// Update the user's address
+app.put('/api/users/:id/address', async (req, res) => {
+    const { id } = req.params;  // Get user ID from the URL params
+    const { address } = req.body;  // Get the address from the request body
+
+    try {
+        // Find the user by ID and update the address
+        const user = await User.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Update the user's address
+        user.address = address;
+        await user.save();  // Save the updated user back to the database
+
+        res.status(200).json({ message: 'Address updated successfully', user });
+    } catch (error) {
+        console.error('Error updating address:', error);
+        res.status(500).json({ message: 'Error updating address' });
+    }
+});
+
+// Get user details by ID
+app.get('/api/users/:userId', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        // Find the user by ID and return the relevant fields
+        const user = await User.findById(userId, 'address numberOfCans');
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching user data', error: error.message });
     }
 });
 
@@ -81,7 +160,7 @@ app.post('/api/login', async (req, res) => {
         // If email and password are correct
         res.status(200).json({
             message: 'Login successful',
-            user: { username: user.username, email: user.email, placeID: user.placeID }
+            user: { _id: user._id, username: user.username, email: user.email, address: user.address, numberOfCans: user.numberOfCans }
         });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
