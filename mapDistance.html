@@ -88,7 +88,7 @@ async function initMap() {
             await google.maps.importLibrary("geometry"); 
         }
 
-        function addresssToLatLng(address) {
+        function addressToLatLng(address) {
             return new Promise((resolve, reject) => {
                 const geocoder = new google.maps.Geocoder();
                 geocoder.geocode({ 'address': address }, function (results, status) {
@@ -100,11 +100,9 @@ async function initMap() {
                 });
             });
         }
-
-
         
         async function showMap(address) {
-            const latLng = await addresssToLatLng(address);
+            const latLng = await addressToLatLng(address);
 
             const { Map } = await google.maps.importLibrary("maps");
             const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -154,20 +152,18 @@ async function initMap() {
         }
 
         
-        function latLngDistance(latLng, address) {
-            latlng2 = addresssToLatLng(address);
-            return latlng2.lat;
-                //return google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latLng.latitude, latLng.longitude), latLng2);
-        
+        async function latLngDistance(latLng, address) {
+            latLng2 = await addressToLatLng(address);
+            latLng3 = new google.maps.LatLng(latLng.latitude, latLng.longitude);
+            return google.maps.geometry.spherical.computeDistanceBetween(latLng3, latLng2);
         }
 
-        function initClosest(address) {
+        async function initClosest(address) {
             const distanceDropoff = document.getElementById("closestDropoff");
-            const closest = latLngDistance(pos, address);
+            const closest = await latLngDistance(pos, address);
             distanceDropoff.innerHTML = `Closest Dropoff: ${closest}`;
-
         }
-
+/*
         async function closestPosting(){
             list = [
                 {
@@ -240,8 +236,9 @@ async function initMap() {
                 
             }
             return closest;
+            
         }
-    
+    */
     </script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPHGXRODOE33zFmbI2l6OSgnkB9jhf8sQ&libraries=places,maps&callback=initAutocomplete"
