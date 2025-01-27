@@ -18,7 +18,7 @@ function Collections() {
         if (!document.querySelector('#google-maps-script')) {
             const script = document.createElement('script');
             script.id = 'google-maps-script'; // Add an ID to prevent duplicate loading
-            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAPHGXRODOE33zFmbI2l6OSgnkB9jhf8sQ&libraries=places,maps`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=API_KEY&libraries=places,maps`;
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
